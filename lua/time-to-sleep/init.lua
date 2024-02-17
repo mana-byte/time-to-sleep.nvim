@@ -1,14 +1,9 @@
--- local M = {}
--- M.status_bar_assistant = require("status-bar-assistant")
--- M.floating_buffer = require("floating-buffer")
--- print("HALP")
--- M.open()
---
--- return M
+local M = {}
 
-local function open()
-  print("HALP")
-end
-return {
-    open = open
-}
+M.status_bar_assistant = require("time-to-sleep.status-bar-assistant")
+M.floating_buffer = require("time-to-sleep.floating-buffer")
+
+M.floating_buffer.open( { M.status_bar_assistant.time_to_sleep() })
+
+
+return M
