@@ -2,8 +2,16 @@ local M = {}
 
 M.status_bar_assistant = require("time-to-sleep.status-bar-assistant")
 M.floating_buffer = require("time-to-sleep.floating-buffer")
-local clock = require("time-to-sleep.clock")
+M.lualine = require("lualine_intergration")
+M.default_pos = "x"
+M.lualine_toggle = false
+
+local clock = require("time-to-sleep.utils.clock")
 local win = nil
+
+if M.lualine.sucess and M.lualine_toggle then
+    M.lualine.inegrate_at(M.default_pos)
+end
 
 M.open_tts = function()
     M.close_tts()
