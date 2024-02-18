@@ -6,7 +6,8 @@ default_config.lualine_tts_toggle = false
 default_config.mappings = {
     journal = {
         open = "<leader>j",
-        save_and_quit = "<Esc>"
+        save_and_quit = "<Esc>",
+        toggle_emojis = "1"
     },
     tts = {
         stop = "<leader>t"

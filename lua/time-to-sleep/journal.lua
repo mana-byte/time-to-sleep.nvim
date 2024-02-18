@@ -1,12 +1,9 @@
-local M = {}
-
-M.date = string.gsub(tostring(os.date("%x")), '/', '-')
-local close_tts = require("time-to-sleep.utils.buffer_functions").close_tts
+local utils = require("time-to-sleep.utils.buffer_functions")
 local config = require("time-to-sleep.config")
 local tips = require("time-to-sleep.floating-buffer")
+
 local tips_win = nil
 local content = {}
-local win = nil
 
 
 local function create_journals_if_not_exist()
@@ -16,21 +13,9 @@ local function create_journals_if_not_exist()
     end
 end
 
-local function is_buffer_displayed(bufnr)
-    for _, winid in ipairs(vim.api.nvim_list_wins()) do
-        if vim.api.nvim_win_get_buf(winid) == bufnr then
-            return true
-        end
-    end
-    return false
-end
-local function close_buf(bufnr)
-    pcall(vim.api.nvim_buf_delete, bufnr, { force = true })
-    return nil
-end
 
-local function read_journal()
-    local journal = "journals/" .. M.date .. ".md"
+local function read_journal(date)
+    local journal = "journals/" .. date .. ".md"
     local sucess, file = pcall(io.open, journal, "r")
     if sucess and file then
         for line in file:lines() do
@@ -43,7 +28,22 @@ local function read_journal()
         if file then
             file:close()
         end
-        table.insert(content, "# Journal for " .. M.date)
+        table.insert(content, "# 📝 Journal for " .. date)
+    end
+end
+
+local M = {}
+
+M.win = nil
+M.date = string.gsub(tostring(os.date("%x")), '/', '-')
+M.emojis = require("time-to-sleep.journal_menus.emojis")
+M.bufnr = nil
+
+M.toggle_emojis = function()
+    if utils.is_buffer_displayed(M.bufnr) then
+        M.emojis.toggle_menu(M.win)
+    else
+        M.emojis.close()
     end
 end
 
@@ -63,10 +63,11 @@ M.save_and_quit = function()
             file:write(line .. "\n")
         end
         file:close()
-        close_tts(win)
-        close_tts(tips_win)
+        M.win = utils.close_tts(M.win)
+        tips_win = utils.close_tts(tips_win)
+        M.emojis.close()
         content = {}
-        M.bufnr = close_buf(M.bufnr)
+        M.bufnr = utils.close_buf(M.bufnr)
     else
         print("Failed to open file for writing")
     end
@@ -79,29 +80,31 @@ M.open = function()
     end
     M.bufnr = vim.api.nvim_create_buf(false, true)
 
-    vim.api.nvim_buf_set_name(M.bufnr, "Journal for" .. M.date .. '.md')
+    vim.api.nvim_buf_set_name(M.bufnr, "Journal for " .. M.date .. '.md')
 
-    read_journal()
+    read_journal(M.date)
 
     vim.api.nvim_buf_set_option(M.bufnr, 'bufhidden', 'hide')
-    vim.api.nvim_buf_set_option(M.bufnr, 'filetype', 'text')
+    vim.api.nvim_buf_set_option(M.bufnr, 'filetype', 'markdown')
     vim.api.nvim_buf_set_option(M.bufnr, 'buftype', 'acwrite')
-    vim.api.nvim_buf_set_option(M.bufnr, 'modified', true)
+    vim.api.nvim_buf_set_option(M.bufnr, 'modifiable', true)
     local opts = {
         style = "minimal",
         relative = "editor",
-        width = 50,
-        height = 30,
-        row = vim.api.nvim_get_option("lines") - 35,
+        width = math.floor(50 / 154 * vim.api.nvim_get_option("columns")),
+        height = math.floor(30 / 42 * vim.api.nvim_get_option("lines")),
+        row = vim.api.nvim_get_option("lines") - math.floor(35 / 42 * vim.api.nvim_get_option("lines")),
         col = vim.api.nvim_get_option("columns") - math.floor((vim.api.nvim_get_option("columns")) / 4),
         border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
         focusable = true
     }
-
-    tips_win = tips.open_at({ " Use " .. config.mappings.journal.save_and_quit .. " to save and quit the journal " },
-        { row = opts.row - 1, col = opts.col - 7 })
+    -- menu windows and tips
+    tips_win = tips.open_at({ "📝 Use " .. config.mappings.journal.save_and_quit .. " to save and quit the journal" },
+        { row = opts.row - 1, col = opts.col - 8 })
+    M.emojis.open()
+    -- open the journal
     vim.api.nvim_buf_set_lines(M.bufnr, 0, -1, false, content)
-    win = vim.api.nvim_open_win(M.bufnr, true, opts)
+    M.win = vim.api.nvim_open_win(M.bufnr, true, opts)
 end
 
 return M
