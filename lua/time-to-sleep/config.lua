@@ -7,7 +7,8 @@ default_config.mappings = {
     journal = {
         open = "<leader>j",
         save_and_quit = "<Esc>",
-        toggle_emojis = "1"
+        toggle_emojis = "1",
+        toggle_titles = "2"
     },
     tts = {
         stop = "<leader>t"

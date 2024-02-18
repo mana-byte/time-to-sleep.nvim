@@ -25,4 +25,13 @@ M.is_buffer_displayed = function(bufnr)
     end
     return false
 end
+
+M.is_window_open = function(winid)
+    for _, id in ipairs(vim.api.nvim_list_wins()) do
+        if id == winid then
+            return true
+        end
+    end
+    return false
+end
 return M
