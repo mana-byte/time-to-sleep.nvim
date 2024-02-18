@@ -26,7 +26,26 @@ M.open = function(content)
         focusable = false
     }
     vim.api.nvim_buf_set_lines(M.bufnr, 0, -1, false, content)
-    local win =vim.api.nvim_open_win(M.bufnr, true, opts)
+    local win = vim.api.nvim_open_win(M.bufnr, true, opts)
+
+    return win
+end
+
+M.open_at = function(content, pos)
+    M.bufnr = vim.api.nvim_create_buf(false, true)
+    vim.api.nvim_buf_set_option(M.bufnr, 'bufhidden', 'delete')
+    local opts = {
+        style = "minimal",
+        relative = "editor",
+        width = maxStringLength(content),
+        height = #content,
+        row = pos.row,
+        col = pos.col,
+        border = "none",
+        focusable = false
+    }
+    vim.api.nvim_buf_set_lines(M.bufnr, 0, -1, false, content)
+    local win = vim.api.nvim_open_win(M.bufnr, true, opts)
 
     return win
 end
