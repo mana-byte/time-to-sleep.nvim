@@ -3,19 +3,19 @@ local tab = require("time-to-sleep.journal_menus.tabs")
 local M = tab:new()
 
 M.tab_content = {
-    "## Journal for " .. string.gsub(tostring(os.date("%x")), '/', '-'),
-    "# What i did today",
-    "# What i learned today",
-    "# What i will do tomorrow",
-    "# What i need too add",
-    "# Improvements",
-    "# Ideas",
-    "# Thoughts",
-    "# Quotes",
-    "# Links",
-    "# Resources",
-    "# TODO",
-    "# Notes",
+    "# Journal for " .. string.gsub(tostring(os.date("%x")), '/', '-'),
+    "## What i did today",
+    "## What i learned today",
+    "## What i will do tomorrow",
+    "## What i need too add",
+    "## Improvements",
+    "## Ideas",
+    "## Thoughts",
+    "## Quotes",
+    "## Links",
+    "## Resources",
+    "## TODO",
+    "## Notes",
 }
 M.tab = require("time-to-sleep.config").mappings.journal.toggle_titles .. 'm'
 M.content = { M.tab }
