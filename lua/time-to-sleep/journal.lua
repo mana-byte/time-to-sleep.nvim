@@ -5,14 +5,12 @@ local tips = require("time-to-sleep.floating-buffer")
 local tips_win = nil
 local content = {}
 
-
 local function create_journals_if_not_exist()
     local success, error_message = vim.fn.mkdir("journals/", "p")
     if not success then
         print("Failed to create directory:", error_message)
     end
 end
-
 
 local function read_journal(date)
     local journal = "journals/" .. date .. ".md"
@@ -37,32 +35,27 @@ local M = {}
 M.win = nil
 M.date = string.gsub(tostring(os.date("%x")), '/', '-')
 M.tabs = {
-    emojis = require("time-to-sleep.journal_menus.emojis"),
-    titles = require("time-to-sleep.journal_menus.titles")
+    emojis = require("time-to-sleep.journal_menus.emojis"):new(),
+    titles = require("time-to-sleep.journal_menus.titles"):new(),
 }
 M.bufnr = nil
 
 local function close_tabs_win()
-    M.tabs.emojis.close_win()
-    M.tabs.titles.close_win()
-end
-local function open_tabs()
-    M.tabs.emojis.open()
-    M.tabs.titles.open()
-end
-
-M.toggle_emojis = function()
-    if utils.is_buffer_displayed(M.bufnr) then
-        M.tabs.emojis.toggle_menu(M.win)
-    else
-        M.tabs.emojis.close_win()
+    for _, tab in pairs(M.tabs) do
+        tab:close_win()
     end
 end
-M.toggle_titles = function()
+local function open_tabs_win()
+    for _, tab in pairs(M.tabs) do
+        tab:open_win()
+    end
+end
+
+M.toggle_tab = function(tab)
     if utils.is_buffer_displayed(M.bufnr) then
-        M.tabs.titles.toggle_menu(M.win)
+        M.tabs[tab]:toggle_menu(M.win)
     else
-        M.tabs.titles.close_win()
+        M.tabs[tab]:close_win()
     end
 end
 
@@ -70,7 +63,7 @@ M.close_all_tabs = function()
     local state = false
     for _, tab in pairs(M.tabs) do
         state = state or tab.toggled
-        tab.close_tab(M.win)
+        tab:close_tab(M.win)
     end
     return state
 end
@@ -134,7 +127,7 @@ M.open = function()
     -- menu windows and tips
     tips_win = tips.open_at({ "📝 Use " .. config.mappings.journal.save_and_quit .. " to save and quit the journal" },
         { row = opts.row - 1, col = opts.col - 8 })
-    open_tabs()
+    open_tabs_win()
     -- open the journal
     vim.api.nvim_buf_set_lines(M.bufnr, 0, -1, false, content)
     M.win = vim.api.nvim_open_win(M.bufnr, true, opts)

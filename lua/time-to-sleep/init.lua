@@ -10,6 +10,7 @@ M.setup = function(config)
     require("time-to-sleep.mappings.journal")
     require("time-to-sleep.mappings.tts")
 end
+
 M.journal = require("time-to-sleep.journal")
 M.tts = require("time-to-sleep.tts")
 M.mappings = require("time-to-sleep.mappings.journal")
