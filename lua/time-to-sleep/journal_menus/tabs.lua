@@ -29,6 +29,9 @@ M.tab_content = {}
 M.tab = ""
 M.content = { M.tab }
 
+function M:open()
+end
+
 function M:calculate_width()
     if self.toggled then
         self.width = maxStringLength(self.tab_content)
@@ -66,30 +69,38 @@ function M:close_tab(win_)
     local sucess, _ = pcall(vim.api.nvim_win_set_cursor, self.win, { 1, 1 })
     if sucess then
         self.content = { self.tab }
-        self.calculate_height(self)
-        self.calculate_width(self)
-        vim.api.nvim_win_set_width(self.win, self.width)
-        vim.api.nvim_win_set_height(self.win, self.height)
-        vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, self.content)
+        self:calculate_tab_content()
     end
 end
 
-function M:toggle_menu(win_)
-    vim.api.nvim_win_set_cursor(self.win, { 1, 1 })
-    if self.toggled then
-        self.content = { self.tab }
-        vim.api.nvim_set_current_win(win_)
-        self.toggled = false
-    else
+function M:open_tab()
+    self.toggled = true
+    pcall(vim.api.nvim_set_current_win, self.win)
+    local sucess, _ = pcall(vim.api.nvim_win_set_cursor,self.win, { 1, 1 })
+    if sucess then
         self.content = self.tab_content
-        vim.api.nvim_set_current_win(self.win)
-        self.toggled = true
+        self:calculate_tab_content()
     end
+end
+
+function M:calculate_tab_content()
     self.calculate_height(self)
     self.calculate_width(self)
     vim.api.nvim_win_set_width(self.win, self.width)
     vim.api.nvim_win_set_height(self.win, self.height)
     vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, self.content)
+end
+
+function M:toggle_menu(journal)
+    self:onToggle(journal)
+    if self.toggled then
+        self:close_tab(journal.win)
+    else
+        self:open_tab()
+    end
+end
+
+function M:onToggle(journal)
 end
 
 return M
