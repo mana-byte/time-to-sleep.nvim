@@ -71,6 +71,7 @@ M.close_all_tabs = function()
 end
 
 M.open_specific_journal = function(date)
+    M.close_all_tabs()
     M.save_and_quit()
     M.date = date
     M.open()

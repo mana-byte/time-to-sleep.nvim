@@ -82,20 +82,17 @@ function M:open_win()
     self.win = vim.api.nvim_open_win(self.bufnr, true, opts)
 end
 
-function M:onToggle(journal)
-    print("toggle")
-    -- if not self.toggle then
-    --     local sucess, lines = pcall(vim.api.nvim_buf_get_lines, self.bufnr, 0, -1, false)
-    --     if not sucess then
-    --         print("Failed to read buffer lines", lines)
-    --         return
-    --     end
-    --     local day = isEveryDayInTable(lines, self.tab_content)
-    --     print(day)
-    --     if day then
-    --         journal.open_specific_journal(day)
-    --     end
-    -- end
+function M:onClose_tab(journal)
+    local sucess, lines = pcall(vim.api.nvim_buf_get_lines, self.bufnr, 0, -1, false)
+    if not sucess then
+        print("Failed to read buffer lines", lines)
+        return
+    end
+    local day = isEveryDayInTable(self.tab_content, lines)
+    print(day)
+    if day then
+        journal.open_specific_journal(day)
+    end
 end
 
 return M

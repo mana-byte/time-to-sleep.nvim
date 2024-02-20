@@ -94,13 +94,19 @@ end
 function M:toggle_menu(journal)
     self:onToggle(journal)
     if self.toggled then
+        self:onClose_tab(journal)
         self:close_tab(journal.win)
     else
+        self:onOpen_tab(journal)
         self:open_tab()
     end
 end
 
 function M:onToggle(journal)
+end
+function M:onOpen_tab(journal)
+end
+function M:onClose_tab(journal)
 end
 
 return M
