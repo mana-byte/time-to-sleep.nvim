@@ -38,7 +38,6 @@ local function getRecentJournals()
         if days > max_days then
             break
         end
-        separated_date[1] = separated_date[1] - 1
         local date = separated_date[1] .. '-' .. separated_date[2] .. '-' .. separated_date[3]
         local file = io.open("journals/" .. date .. ".md", "r")
         if file ~= nil then
@@ -47,13 +46,26 @@ local function getRecentJournals()
         else
             i = i - 1
         end
+        separated_date[1] = separated_date[1] - 1
     end
     return recent_journals
+end
+local function removeEmote(tbl)
+    for i, value in pairs(tbl) do
+        tbl[i] = value:gsub("🔖 ", "")
+    end
+    return tbl
+end
+local function addEmote(tbl)
+    for i, value in pairs(tbl) do
+        tbl[i] = "🔖 " .. value
+    end
+    return tbl
 end
 
 local M = tab:new()
 
-M.tab_content = getRecentJournals()
+M.tab_content = addEmote(getRecentJournals())
 M.tab = require("time-to-sleep.config").mappings.journal.toggle_history .. 'm'
 M.content = { M.tab }
 function M:open_win()
@@ -69,7 +81,6 @@ function M:open_win()
     vim.api.nvim_buf_set_option(self.bufnr, 'buftype', 'nofile')
     vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, self.content)
     vim.api.nvim_buf_set_option(self.bufnr, 'modifiable', true)
-    -- you have to insert not make n=an = 
     self.default_opts.width = #self.tab
     self.default_opts.row = vim.api.nvim_get_option("lines") - math.floor(26 / 42 * vim.api.nvim_get_option("lines"))
     self.win = vim.api.nvim_open_win(self.bufnr, true, self.default_opts)
@@ -82,9 +93,8 @@ function M:onClose_tab(journal)
         return
     end
     local day = isEveryDayInTable(self.tab_content, lines)
-    print(day)
     if day then
-        journal.open_specific_journal(day)
+        journal.open_specific_journal(removeEmote({day})[1])
     end
 end
 
