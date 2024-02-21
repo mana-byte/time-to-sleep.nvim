@@ -54,6 +54,7 @@ M.bufnr = nil
 
 
 M.toggle_tab = function(tab)
+    M.close_other_tabs(tab)
     if utils.is_buffer_displayed(M.bufnr) then
         M.tabs[tab]:toggle_menu(M)
     else
@@ -68,6 +69,13 @@ M.close_all_tabs = function()
         tab:close_tab(M.win)
     end
     return state
+end
+M.close_other_tabs = function(tab_)
+    for tab_name, tab in pairs(M.tabs) do
+        if tab_name ~= tab_ then
+            tab:close_tab(M.win)
+        end
+    end
 end
 
 M.open_specific_journal = function(date)
