@@ -28,6 +28,16 @@ M.bufnr = nil
 M.tab_content = {}
 M.tab = ""
 M.content = { M.tab }
+M.default_opts = {
+        style = "minimal",
+        relative = "editor",
+        height = M.height,
+        col = vim.api.nvim_get_option("columns") - math.floor((vim.api.nvim_get_option("columns")) / 4) - 20,
+        border = { "╭", "─", "+", "│", "╯", "─", "╰", "│" },
+        focusable = true,
+        width = 2,
+        row = vim.api.nvim_get_option("lines") - math.floor(26 / 42 * vim.api.nvim_get_option("lines")),
+}
 
 function M:open()
 end
@@ -107,6 +117,8 @@ end
 function M:onOpen_tab(journal)
 end
 function M:onClose_tab(journal)
+end
+function M:open_win()
 end
 
 return M
