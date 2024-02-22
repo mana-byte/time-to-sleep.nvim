@@ -11,6 +11,16 @@ local function create_journals_if_not_exist()
         print("Failed to create directory:", error_message)
     end
 end
+local function configure_journal_tabs()
+    local tabs = {}
+    for _, tab in ipairs(config.journal_tabs) do
+        local sucess, pot_tab = pcall(require, "time-to-sleep.journal_menus." .. tab)
+        if sucess then
+            tabs[tab] = pot_tab:new()
+        end
+    end
+    return tabs
+end
 
 local function close_tabs_win(tabs)
     for _, tab in pairs(tabs) do
@@ -45,11 +55,7 @@ local M = {}
 
 M.win = nil
 M.date = string.gsub(tostring(os.date("%x")), '/', '-')
-M.tabs = {
-    emojis = require("time-to-sleep.journal_menus.emojis"):new(),
-    titles = require("time-to-sleep.journal_menus.titles"):new(),
-    history = require("time-to-sleep.journal_menus.history"):new()
-}
+M.tabs = configure_journal_tabs()
 M.bufnr = nil
 
 

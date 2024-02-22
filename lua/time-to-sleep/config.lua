@@ -4,13 +4,33 @@ default_config.default_pos = "x"
 default_config.tts_toggle = true
 default_config.lualine_tts_toggle = false
 default_config.telescope_integration = true
+default_config.journal_tabs = {
+    "emojis",
+    "titles",
+    "history",
+}
+default_config.journal_tabs_spacing = {
+    35,
+    30,
+    25,
+    20,
+    15,
+    10,
+    5
+}
+default_config.toggle_tabs_mappings = {
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7"
+}
 default_config.mappings = {
     journal = {
         open = "<leader>j",
         save_and_quit = "<Esc>",
-        toggle_emojis = "1",
-        toggle_titles = "2",
-        toggle_history = "3"
     },
     tts = {
         stop = "<leader>t"

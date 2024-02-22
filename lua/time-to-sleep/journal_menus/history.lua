@@ -1,4 +1,6 @@
 local tab = require("time-to-sleep.journal_menus.tabs")
+local config = require("time-to-sleep.config")
+local getIndex = require("time-to-sleep.utils.table").getIndex
 
 local function splitString(inputString, separator)
     local result = {}
@@ -66,7 +68,7 @@ end
 local M = tab:new()
 
 M.tab_content = addEmote(getRecentJournals())
-M.tab = require("time-to-sleep.config").mappings.journal.toggle_history .. 'm'
+M.tab = '📆'
 M.content = { M.tab }
 function M:open_win()
     if self.win ~= nil or self.bufnr ~= nil then
@@ -82,7 +84,9 @@ function M:open_win()
     vim.api.nvim_buf_set_lines(self.bufnr, 0, -1, false, self.content)
     vim.api.nvim_buf_set_option(self.bufnr, 'modifiable', true)
     self.default_opts.width = #self.tab
-    self.default_opts.row = vim.api.nvim_get_option("lines") - math.floor(26 / 42 * vim.api.nvim_get_option("lines"))
+    self.default_opts.row = vim.api.nvim_get_option("lines") -
+    math.floor(config.journal_tabs_spacing[getIndex(config.journal_tabs, "history")] / 42 *
+    vim.api.nvim_get_option("lines"))
     self.win = vim.api.nvim_open_win(self.bufnr, true, self.default_opts)
 end
 
@@ -94,7 +98,7 @@ function M:onClose_tab(journal)
     end
     local day = isEveryDayInTable(self.tab_content, lines)
     if day then
-        journal.open_specific_journal(removeEmote({day})[1])
+        journal.open_specific_journal(removeEmote({ day })[1])
     end
 end
 
