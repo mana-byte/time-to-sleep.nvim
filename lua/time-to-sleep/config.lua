@@ -1,9 +1,12 @@
+local table_utils = require("time-to-sleep.utils.table")
+
 local default_config = {}
 
 default_config.default_pos = "x"
 default_config.tts_toggle = true
 default_config.lualine_tts_toggle = false
 default_config.telescope_integration = true
+
 default_config.journal_tabs = {
     "emojis",
     "titles",
@@ -38,9 +41,7 @@ default_config.mappings = {
 }
 
 default_config.configure = function(config)
-    for key, value in pairs(config) do
-        default_config[key] = value
-    end
+    table_utils.setValues(default_config, config)
 end
 
 return default_config

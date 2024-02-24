@@ -48,7 +48,18 @@ local function getRecentJournals()
         else
             i = i - 1
         end
-        separated_date[1] = separated_date[1] - 1
+        if separated_date[1] == 1 and separated_date[2] == 1 then
+            separated_date[1] = 31
+            separated_date[2] = 12
+            separated_date[3] = separated_date[3] - 1
+        else
+            if separated_date[1] == 1 then
+                separated_date[1] = 31
+                separated_date[2] = separated_date[2] - 1
+            else
+                separated_date[1] = separated_date[1] - 1
+            end
+        end
     end
     return recent_journals
 end

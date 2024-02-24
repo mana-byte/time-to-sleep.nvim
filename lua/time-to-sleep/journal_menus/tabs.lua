@@ -26,17 +26,17 @@ M.win = nil
 M.toggled = false
 M.bufnr = nil
 M.tab_content = {}
-M.tab = ""
+M.tab = "🔖"
 M.content = { M.tab }
 M.default_opts = {
-        style = "minimal",
-        relative = "editor",
-        height = M.height,
-        col = vim.api.nvim_get_option("columns") - math.floor((vim.api.nvim_get_option("columns")) / 4) - 20,
-        border = { "╭", "─", "+", "│", "╯", "─", "╰", "│" },
-        focusable = true,
-        width = 2,
-        row = vim.api.nvim_get_option("lines") - math.floor(26 / 42 * vim.api.nvim_get_option("lines")),
+    style = "minimal",
+    relative = "editor",
+    height = M.height,
+    col = vim.api.nvim_get_option("columns") - math.floor((vim.api.nvim_get_option("columns")) / 4) - 20,
+    border = { "╭", "─", "+", "│", "╯", "─", "╰", "│" },
+    focusable = true,
+    width = #M.tab,
+    row = vim.api.nvim_get_option("lines") - math.floor(26 / 42 * vim.api.nvim_get_option("lines")),
 }
 
 function M:open()
@@ -86,7 +86,7 @@ end
 function M:open_tab()
     self.toggled = true
     pcall(vim.api.nvim_set_current_win, self.win)
-    local sucess, _ = pcall(vim.api.nvim_win_set_cursor,self.win, { 1, 1 })
+    local sucess, _ = pcall(vim.api.nvim_win_set_cursor, self.win, { 1, 1 })
     if sucess then
         self.content = self.tab_content
         self:calculate_tab_content()
@@ -114,10 +114,13 @@ end
 
 function M:onToggle(journal)
 end
+
 function M:onOpen_tab(journal)
 end
+
 function M:onClose_tab(journal)
 end
+
 function M:open_win()
 end
 
