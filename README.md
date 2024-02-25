@@ -98,7 +98,7 @@ For example in Emoji tab:
 - Open it with "1" (default)
 - Look for what emoji you want to use
 - Delete it (with "dw" or "dd")
-- Close tab with "<Esc>" (default) or "1"
+- Close tab with "Esc" (default) or "1"
 - Paste it ! 🏆
 
 ⚠️  For the history tab ⚠️ :
