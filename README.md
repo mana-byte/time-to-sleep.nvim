@@ -1,7 +1,7 @@
 # 💤 time-to-sleep.nvim
 
 A nvim plugin that adds the function to write journals in a fully customisable floating window.
-![Journal floating window](https://private-user-images.githubusercontent.com/93316844/307545348-33a720ef-a0d8-448e-8d60-72246c97235c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDg4MDMyODcsIm5iZiI6MTcwODgwMjk4NywicGF0aCI6Ii85MzMxNjg0NC8zMDc1NDUzNDgtMzNhNzIwZWYtYTBkOC00NDhlLThkNjAtNzIyNDZjOTcyMzVjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjI0VDE5Mjk0N1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTRlNzRkMTRhMjhlNDhlYzdlMWYxNjkyNjVhN2Q1ODIwZDliZDE2NGY1MDEzMWJjNzcwYWJkMTIzZmNlYTIwYzAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.yD-_S4PkDoGxMYv7Ik-qRgObbPTYEOrQ0_PMwdWFmBY)
+![Journal floating window](https://github.com/mana-byte/time-to-sleep.nvim/assets/93316844/33a720ef-a0d8-448e-8d60-72246c97235c)
 ![image](https://github.com/mana-byte/time-to-sleep.nvim/assets/93316844/1c09b6e5-110f-4eb1-80c1-67021825225b)
 ## ✨ Features
 
