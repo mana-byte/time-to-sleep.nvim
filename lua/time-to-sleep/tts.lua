@@ -1,7 +1,4 @@
 local M = {}
-
-local config = require('time-to-sleep.config')
-
 M.status_bar_assistant = require("time-to-sleep.status-bar-assistant")
 M.floating_buffer = require("time-to-sleep.floating-buffer")
 M.lualine = require("lualine.lualine_intergration")
@@ -29,11 +26,13 @@ M.stop_tts = function()
     M.close_tts(win)
 end
 
-if M.lualine.sucess and config.lualine_tts_toggle then
-    M.lualine.inegrate_at(config.default_pos)
-end
-if config.tts_toggle then
-    M.start_tts()
+M.boot_tts = function(config)
+    if M.lualine.sucess and config.lualine_tts_toggle then
+        M.lualine.inegrate_at(config.default_pos)
+    end
+    if config.tts_toggle and not M.lualine.sucess then
+        M.start_tts()
+    end
 end
 
 return M

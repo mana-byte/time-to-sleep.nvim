@@ -2,7 +2,7 @@
 
 A nvim plugin that adds the function to write journals in a fully customisable floating window.
 ![Journal floating window](https://private-user-images.githubusercontent.com/93316844/307545348-33a720ef-a0d8-448e-8d60-72246c97235c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MDg4MDMyODcsIm5iZiI6MTcwODgwMjk4NywicGF0aCI6Ii85MzMxNjg0NC8zMDc1NDUzNDgtMzNhNzIwZWYtYTBkOC00NDhlLThkNjAtNzIyNDZjOTcyMzVjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDAyMjQlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQwMjI0VDE5Mjk0N1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTRlNzRkMTRhMjhlNDhlYzdlMWYxNjkyNjVhN2Q1ODIwZDliZDE2NGY1MDEzMWJjNzcwYWJkMTIzZmNlYTIwYzAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.yD-_S4PkDoGxMYv7Ik-qRgObbPTYEOrQ0_PMwdWFmBY)
-
+![image](https://github.com/mana-byte/time-to-sleep.nvim/assets/93316844/1c09b6e5-110f-4eb1-80c1-67021825225b)
 ## ✨ Features
 
 - 📔 Floating journal window that gives you a new journal everyday (.md files).
@@ -35,9 +35,9 @@ This is the default Configuration with the default mappings.
 
 ```lua
 {
-    default_pos = "x"
     tts_toggle = true
     lualine_tts_toggle = false -- If you have lualine it is better
+    default_pos = "x" -- If you have lualine
     emojis = { -- Every default emojis for the emoji tab
         "😊", "😀", "😅", "😂", "🤣", "😉", "😍", "😘", "😜", "😎",
         "😇", "🥰", "🤩", "😋", "😆", "😁", "😄", "😃", "😚", "😙",
@@ -90,7 +90,7 @@ For example in Emoji tab:
 - Open it with "1" (default)
 - Look for what emoji you want to use
 - Delete it (with "dw" or "dd")
-- Close tab with "<Esc>" or "1"
+- Close tab with "<Esc>" (default) or "1"
 - Paste it ! 🏆
 
 ⚠️  For the history tab ⚠️ :
