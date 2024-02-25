@@ -58,6 +58,7 @@ This is the default Configuration with the default mappings.
         "emojis",    -- The order matters. Emojis will be the first tab with a spacing of 35 and the toggle mapping "1"
         "titles",    -- Titles comes second so it will be with a spacing of 30 and the toggle mapping "2"
         "history",   -- Guess
+        "code_blocks",
     }
     journal_tabs_spacing = { -- Position of tabs relative to the floating window
         35,
