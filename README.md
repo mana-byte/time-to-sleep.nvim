@@ -46,6 +46,13 @@ This is the default Configuration with the default mappings.
         "✏️", "📝", "📖", "📚", "📔", "📓", "📒", "📕", "📗", "📘",
         "📙", "📚", "📖", "📜", "📄", "📃", "📑", "📊", "📈", "📉",
     }
+    code_blocks = { -- Every default code blocks for the code block tab
+        "```lua  ```",
+        "```java    ```",
+        "```py    ```",
+        "```sql    ```",
+        "```cpp    ```",
+    }
 
     journal_tabs = { -- Add here your tabs up to 7 (3 existing tabs currently but planning on adding 2 more)
         "emojis",    -- The order matters. Emojis will be the first tab with a spacing of 35 and the toggle mapping "1"
@@ -100,5 +107,5 @@ For example in Emoji tab:
 - Close tab with the toggle mapping to confirm your choice
 - The journal corresponding to the date you deleted will open. (It saves the journal you were in)
 
-## ⚠️ End word
+## 🚧 End word
 This plugin is still in development.

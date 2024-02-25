@@ -11,11 +11,19 @@ default_config.emojis = {
     "✏️", "📝", "📖", "📚", "📔", "📓", "📒", "📕", "📗", "📘",
     "📙", "📚", "📖", "📜", "📄", "📃", "📑", "📊", "📈", "📉",
 }
+default_config.code_blocks = {
+    "```lua  ```",
+    "```java    ```",
+    "```py    ```",
+    "```sql    ```",
+    "```cpp    ```",
+}
 
 default_config.journal_tabs = {
     "emojis",
     "titles",
     "history",
+    "code_blocks",
 }
 default_config.journal_tabs_spacing = {
     35,
