@@ -93,14 +93,14 @@ This is the default Configuration with the default mappings.
 ```
 ## ✏️ Usage
 
-### ✏️ Journal
-- Open the journal with the mapping you set in the Configuration
+### - ✏️ Journal
+Open the journal with the mapping you set in the Configuration
 
 🚀 A very pratical and handy feature:
 
- You can enter visual mode, select the code you want to paste in the journal and then open the journal with the mapping you set in the Configuration. The code will be pasted in the journal as a code block.
+You can enter visual mode, select the code you want to paste in the journal and then open the journal with the mapping you set in the Configuration. The code will be pasted in the journal as a code block.
 
-### 📂 Tabs
+### - 📂 Tabs
 Every tab works on the action of deleting what you need.
 
 For example in Emoji tab:
