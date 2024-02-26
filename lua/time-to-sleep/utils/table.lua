@@ -39,6 +39,14 @@ M.mergeValues = function(dest, source)
         end
     end
 end
+
+M.appendTable = function(dest, source)
+    for _, value in ipairs(source) do
+        table.insert(dest, value)
+    end
+    return dest
+end
+
 M.printTable = function(tbl, indent)
     indent = indent or 0
     for k, v in pairs(tbl) do

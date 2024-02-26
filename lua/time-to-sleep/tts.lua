@@ -30,7 +30,7 @@ M.boot_tts = function(config)
     if M.lualine.sucess and config.lualine_tts_toggle then
         M.lualine.inegrate_at(config.default_pos)
     end
-    if config.tts_toggle and not M.lualine.sucess then
+    if config.tts_toggle and not config.lualine_tts_toggle then
         M.start_tts()
     end
 end

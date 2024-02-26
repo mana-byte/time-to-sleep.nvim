@@ -1,7 +1,7 @@
 local default_config = {}
 
 default_config.tts_toggle = true
-default_config.lualine_tts_toggle = true
+default_config.lualine_tts_toggle = false
 default_config.default_pos = "x"
 default_config.emojis = {
     "😊", "😀", "😅", "😂", "🤣", "😉", "😍", "😘", "😜", "😎",

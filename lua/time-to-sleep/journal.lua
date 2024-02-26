@@ -1,9 +1,25 @@
 local utils = require("time-to-sleep.utils.buffer_functions")
+local tbl_utils = require("time-to-sleep.utils.table")
 local config = require("time-to-sleep.config")
 local tips = require("time-to-sleep.floating-buffer")
 
 local tips_win = nil
 local content = {}
+
+local function get_file_type()
+    local bufnr = vim.api.nvim_get_current_buf()
+    local file_type = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+    return file_type
+end
+local function get_visual_selection()
+    vim.cmd("normal! gv")
+    local bufnr = vim.api.nvim_get_current_buf()
+    local start = vim.api.nvim_buf_get_mark(bufnr, "<")
+    local finish = vim.api.nvim_buf_get_mark(bufnr, ">")
+    start[1], start[2] = start[1] - 1, start[2] - 1
+    finish[1], finish[2] = finish[1] - 1, finish[2] - 1
+    return vim.api.nvim_buf_get_lines(bufnr, start[1], finish[1] + 1, false)
+end
 
 local function create_journals_if_not_exist()
     local success, error_message = vim.fn.mkdir("journals/", "p")
@@ -121,6 +137,18 @@ M.save_and_quit = function()
         M.date = string.gsub(tostring(os.date("%x")), '/', '-')
     else
         print("Failed to open file for writing")
+    end
+end
+
+M.open_and_copy = function()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", true)
+    local lines = get_visual_selection()
+    if #lines ~= 0 then
+        local lines_in_mark = tbl_utils.appendTable({ "", "```" .. get_file_type(), "" }, lines)
+        M.open()
+        tbl_utils.appendTable(content, lines_in_mark)
+        tbl_utils.appendTable(content, { "", "```" })
+        vim.api.nvim_buf_set_lines(M.bufnr, 0, -1, false, content)
     end
 end
 
