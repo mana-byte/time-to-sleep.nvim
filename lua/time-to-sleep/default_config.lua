@@ -46,6 +46,7 @@ default_config.toggle_tabs_mappings = {
 default_config.mappings = {
     journal = {
         open = "<leader>j",
+        open_with_code = "<leader>j",
         save_and_quit = "<Esc>",
     },
     tts = {
