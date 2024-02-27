@@ -2,6 +2,7 @@ local utils = require("time-to-sleep.utils.buffer_functions")
 local tbl_utils = require("time-to-sleep.utils.table")
 local config = require("time-to-sleep.config")
 local tips = require("time-to-sleep.floating-buffer")
+local custom_tabs = require("time-to-sleep.journal_menus.custom_tabs")
 
 local tips_win = nil
 local content = {}
@@ -30,6 +31,18 @@ local function create_journals_if_not_exist()
         print("Failed to create directory:", error_message)
     end
 end
+
+local function configure_custom_tabs()
+    local tabs = {}
+    for _, tab_id in ipairs(config.custom_journal_tabs) do
+        local custom_tab = custom_tabs.custom_tabs[tab_id]
+        if custom_tab then
+            tabs[tab_id] = custom_tab:new()
+        end
+    end
+    return tabs
+end
+
 local function configure_journal_tabs()
     local tabs = {}
     for _, tab in ipairs(config.journal_tabs) do
@@ -38,6 +51,7 @@ local function configure_journal_tabs()
             tabs[tab] = pot_tab:new()
         end
     end
+    tbl_utils.add_table(tabs, configure_custom_tabs())
     return tabs
 end
 
