@@ -11,14 +11,17 @@ local function get_file_type()
     local file_type = vim.api.nvim_buf_get_option(bufnr, 'filetype')
     return file_type
 end
+
 local function get_visual_selection()
     vim.cmd("normal! gv")
-    local bufnr = vim.api.nvim_get_current_buf()
-    local start = vim.api.nvim_buf_get_mark(bufnr, "<")
-    local finish = vim.api.nvim_buf_get_mark(bufnr, ">")
-    start[1], start[2] = start[1] - 1, start[2] - 1
-    finish[1], finish[2] = finish[1] - 1, finish[2] - 1
-    return vim.api.nvim_buf_get_lines(bufnr, start[1], finish[1] + 1, false)
+    local start_line, start_col = unpack(vim.api.nvim_buf_get_mark(0, "<"))
+    local end_line, end_col = unpack(vim.api.nvim_buf_get_mark(0, ">"))
+    if end_line < start_line or (end_line == start_line and end_col < start_col) then
+        start_line, end_line = end_line, start_line
+        start_col, end_col = end_col, start_col
+    end
+    local lines = vim.api.nvim_buf_get_lines(0, start_line - 1, end_line, false)
+    return lines
 end
 
 local function create_journals_if_not_exist()
