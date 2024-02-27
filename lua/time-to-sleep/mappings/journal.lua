@@ -11,3 +11,7 @@ for i, tab in ipairs(config.journal_tabs) do
     vim.keymap.set('n', config.toggle_tabs_mappings[i],
         function() pcall(modules.journal.toggle_tab, tab) end)
 end
+for i, tab in ipairs(config.custom_journal_tabs) do
+    vim.keymap.set('n', config.toggle_tabs_mappings[i+#config.journal_tabs],
+        function() pcall(modules.journal.toggle_tab, tab) end)
+end

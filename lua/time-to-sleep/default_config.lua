@@ -25,6 +25,9 @@ default_config.journal_tabs = {
     "history",
     "code_blocks",
 }
+default_config.custom_journal_tabs = {
+}
+
 default_config.journal_tabs_spacing = {
     35,
     30,

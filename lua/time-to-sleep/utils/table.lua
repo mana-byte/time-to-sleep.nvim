@@ -47,6 +47,12 @@ M.appendTable = function(dest, source)
     return dest
 end
 
+M.add_table = function(target_table, source_table)
+    for key, value in pairs(source_table) do
+        target_table[key] = value
+    end
+end
+
 M.printTable = function(tbl, indent)
     indent = indent or 0
     for k, v in pairs(tbl) do
