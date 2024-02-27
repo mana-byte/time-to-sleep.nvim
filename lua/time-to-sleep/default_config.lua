@@ -26,7 +26,6 @@ default_config.journal_tabs = {
     "code_blocks",
 }
 default_config.custom_journal_tabs = {
-    'none'
 }
 
 default_config.journal_tabs_spacing = {

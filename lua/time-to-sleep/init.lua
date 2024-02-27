@@ -13,6 +13,4 @@ M.setup = function(config)
     require("time-to-sleep.mappings.tts")
 end
 
-M.create_tab("None", "none", "markdown", "🚧",{"# No tab selected"})
-
 return M
