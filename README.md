@@ -60,6 +60,9 @@ This is the default Configuration with the default mappings.
         "history",   -- Guess
         "code_blocks",
     }
+    default_config.custom_journal_tabs = {
+        -- custom tabs/ created tabs go in here
+    }
     journal_tabs_spacing = { -- Position of tabs relative to the floating window
         35,
         30,
@@ -116,6 +119,21 @@ For example in Emoji tab:
 - Delete the date (with "dd")
 - Close tab with the toggle mapping to confirm your choice
 - The journal corresponding to the date you deleted will open. (It saves the journal you were in)
+
+## 💬 Adding new Tabs / Creating custom tabs !
+- To create a new tab just write this before your require("time-to-sleep").setup().
+```lua
+require("time-to-sleep").create_tab(tab_name, tab_id, tab_filetype, tab, content)
+
+-- tab_id is what you will use in your config to call the tab
+-- if tab_file_type is nil then tab_filetype = 'markdown'
+-- tab is the emoji will represent the tab is the journal menu
+-- content is what the tab will display once you open it up
+
+```
+- In your config don't forget to add the tab_id in the custom_journal_tabs so that the tab will load.
+
+The custom tabs will be placed at the end of the tab list.
 
 ## 🚧 End word
 This plugin is still in development.

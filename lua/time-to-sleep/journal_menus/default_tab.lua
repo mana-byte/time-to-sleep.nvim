@@ -19,8 +19,11 @@ function M:new(tab_name, tab_id, tab_filetype, tab_, content)
     o.tab_id = tab_id
     o.tab_filetype = tab_filetype
     o.tab = tab_
-    o.content = {o.tab}
+    o.content = { o.tab }
     o.tab_content = content
+    if o.tab_filetype == nil then
+        o.tab_filetype = 'markdown'
+    end
     return o
 end
 
@@ -31,7 +34,6 @@ function M:open_win()
     self.bufnr = vim.api.nvim_create_buf(false, true)
 
     vim.api.nvim_buf_set_name(self.bufnr, self.tab_name .. " menu")
-
     vim.api.nvim_buf_set_option(self.bufnr, 'bufhidden', 'unload')
     vim.api.nvim_buf_set_option(self.bufnr, 'filetype', self.tab_filetype)
     vim.api.nvim_buf_set_option(self.bufnr, 'buftype', 'nofile')
