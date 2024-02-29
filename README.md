@@ -135,5 +135,5 @@ require("time-to-sleep").create_tab(tab_name, tab_id, tab_filetype, tab, content
 
 The custom tabs will be placed at the end of the tab list.
 
-## 🚧 End word
-This plugin is still in development.
+## 🚧 This plugin is still in development
+
