@@ -30,12 +30,25 @@ local function isEveryDayInTable(tbl, super_tbl)
     end
 end
 
+local function getPreviousday(day)
+    local parsedDate = os.time {
+        year = tonumber(day[3]),
+        month = tonumber(day[2]),
+        day = tonumber(day[1])
+    }
+    local previousDayTime = parsedDate - (24 * 60 * 60)
+    local formatedDate = os.date("%d-%m-%Y", previousDayTime)
+    return splitString(formatedDate, '-')
+end
+
 local function getRecentJournals()
     local recent_journals = {}
-    local separated_date = splitString(os.date("%x"), '/')
+    local separated_date = splitString(os.date("%d/%m/%Y"), '/')
+    table.insert(recent_journals, os.date("%d-%m-%Y"))
     local max_days = 20
     local days = 0
     for i = 1, 10 do
+        separated_date = getPreviousday(separated_date)
         days = days + 1
         if days > max_days then
             break
@@ -48,21 +61,10 @@ local function getRecentJournals()
         else
             i = i - 1
         end
-        if separated_date[1] == 1 and separated_date[2] == 1 then
-            separated_date[1] = 31
-            separated_date[2] = 12
-            separated_date[3] = separated_date[3] - 1
-        else
-            if separated_date[1] == 1 then
-                separated_date[1] = 31
-                separated_date[2] = separated_date[2] - 1
-            else
-                separated_date[1] = separated_date[1] - 1
-            end
-        end
     end
     return recent_journals
 end
+
 local function removeEmote(tbl)
     for i, value in pairs(tbl) do
         tbl[i] = value:gsub("🔖 ", "")
@@ -96,8 +98,8 @@ function M:open_win()
     vim.api.nvim_buf_set_option(self.bufnr, 'modifiable', true)
     self.default_opts.width = #self.tab
     self.default_opts.row = vim.api.nvim_get_option("lines") -
-    math.floor(config.journal_tabs_spacing[getIndex(config.journal_tabs, "history")] / 42 *
-    vim.api.nvim_get_option("lines"))
+        math.floor(config.journal_tabs_spacing[getIndex(config.journal_tabs, "history")] / 42 *
+            vim.api.nvim_get_option("lines"))
     self.win = vim.api.nvim_open_win(self.bufnr, true, self.default_opts)
 end
 

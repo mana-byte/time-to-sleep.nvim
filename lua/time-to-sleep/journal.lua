@@ -87,7 +87,7 @@ end
 local M = {}
 
 M.win = nil
-M.date = string.gsub(tostring(os.date("%x")), '/', '-')
+M.date = os.date("%d-%m-%Y")
 M.tabs = configure_journal_tabs()
 M.bufnr = nil
 
@@ -151,7 +151,7 @@ M.save_and_quit = function()
         close_tabs_win(M.tabs)
         content = {}
         M.bufnr = utils.close_buf(M.bufnr)
-        M.date = string.gsub(tostring(os.date("%x")), '/', '-')
+        M.date = os.date("%d-%m-%Y")
     else
         print("Failed to open file for writing")
     end
