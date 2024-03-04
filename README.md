@@ -125,10 +125,10 @@ For example in Emoji tab:
 ```lua
 require("time-to-sleep").create_tab(tab_name, tab_id, tab_filetype, tab, content)
 
--- tab_id is what you will use in your config to call the tab
--- if tab_file_type is nil then tab_filetype = 'markdown'
--- tab is the emoji will represent the tab is the journal menu
--- content is what the tab will display once you open it up
+-- tab_id is what you will use in your config to call the tab: String
+-- if tab_file_type is nil then tab_filetype = 'markdown' : String
+-- tab is the emoji will represent the tab is the journal menu : String
+-- content is what the tab will display once you open it up : Table
 
 ```
 - In your config don't forget to add the tab_id in the custom_journal_tabs so that the tab will load.
