@@ -135,7 +135,7 @@ require("time-to-sleep").create_tab(tab_name, tab_id, tab_filetype, tab, content
 
 The custom tabs will be placed at the end of the tab list.
 
-EXAMPLE:
+### Example config with a custom tab:
 ```lua
     {
         "mana-byte/time-to-sleep.nvim",
