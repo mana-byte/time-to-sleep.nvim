@@ -60,7 +60,7 @@ This is the default Configuration with the default mappings.
         "history",   -- Guess
         "code_blocks",
     }
-    default_config.custom_journal_tabs = {
+    custom_journal_tabs = {
         -- custom tabs/ created tabs go in here
     }
     journal_tabs_spacing = { -- Position of tabs relative to the floating window
@@ -128,12 +128,32 @@ require("time-to-sleep").create_tab(tab_name, tab_id, tab_filetype, tab, content
 -- tab_id is what you will use in your config to call the tab: String
 -- if tab_file_type is nil then tab_filetype = 'markdown' : String
 -- tab is the emoji will represent the tab is the journal menu : String
--- content is what the tab will display once you open it up : Table
+-- content is what the tab will display once you open it up : Table of String
 
 ```
 - In your config don't forget to add the tab_id in the custom_journal_tabs so that the tab will load.
 
 The custom tabs will be placed at the end of the tab list.
 
+EXAMPLE:
+```lua
+    {
+        "mana-byte/time-to-sleep.nvim",
+        config = function()
+            local time_to_sleep = require("time-to-sleep")
+            time_to_sleep.create_tab("alphabet", 'alphabet', 'markdown', '🍃', {
+                "a",
+                "b",
+                "c",
+            })
+            time_to_sleep.setup({
+                lualine_tts_toggle = true,
+                custom_journal_tabs = {
+                    'alphabet'
+                }
+            })
+        end
+    }
+```
 ## 🚧 This plugin is still in development
 
