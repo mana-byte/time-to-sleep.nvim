@@ -5,7 +5,7 @@ local getIndex = require("time-to-sleep.utils.table").getIndex
 local M = tab:new()
 
 M.tab_content = {
-    "# Journal for " .. string.gsub(tostring(os.date("%x")), '/', '-'),
+    "# Journal for " .. os.date("%d-%m-%Y"),
     "## What i did today",
     "## What i learned today",
     "## What i will do tomorrow",
