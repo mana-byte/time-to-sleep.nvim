@@ -156,4 +156,3 @@ The custom tabs will be placed at the end of the tab list.
     }
 ```
 ## 🚧 This plugin is still in development
-

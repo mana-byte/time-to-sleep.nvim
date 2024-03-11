@@ -1,5 +1,5 @@
 local tab = require("time-to-sleep.journal_menus.tabs")
-local config = require("time-to-sleep.config")
+local config = require("lua.time-to-sleep.config.config")
 local getIndex = require("time-to-sleep.utils.table").getIndex
 
 local M = tab:new()

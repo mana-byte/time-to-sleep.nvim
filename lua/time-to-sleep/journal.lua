@@ -1,7 +1,7 @@
 local utils = require("time-to-sleep.utils.buffer_functions")
 local tbl_utils = require("time-to-sleep.utils.table")
-local config = require("time-to-sleep.config")
-local tips = require("time-to-sleep.floating-buffer")
+local config = require("lua.time-to-sleep.config.config")
+local tips = require("lua.time-to-sleep.utils.floating-buffer")
 local custom_tabs = require("time-to-sleep.journal_menus.custom_tabs")
 
 local tips_win = nil

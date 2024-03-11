@@ -6,7 +6,7 @@ if not M.sucess then
     return M
 end
 
-local time_to_sleep = require("time-to-sleep.status-bar-assistant").time_to_sleep
+local time_to_sleep = require("lua.time-to-sleep.chearup.status-bar-assistant").time_to_sleep
 
 local positions = {
     a = { lualine_a = { time_to_sleep } },
