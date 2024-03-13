@@ -1,5 +1,5 @@
 local table_utils = require("time-to-sleep.utils.table")
-local default_config = require("lua.time-to-sleep.config.default_config")
+local default_config = require("time-to-sleep.config.default_config")
 
 default_config.configured = false
 -- Load the user configuration file PLS
