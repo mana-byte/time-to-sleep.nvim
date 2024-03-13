@@ -1,5 +1,5 @@
 local M = {}
-local config_ = require("lua.time-to-sleep.config.config")
+local config_ = require("time-to-sleep.config.config")
 local custom_tabs_ = require("time-to-sleep.journal_menus.custom_tabs")
 M.default_tab = require("time-to-sleep.journal_menus.default_tab")
 
